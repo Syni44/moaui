@@ -8,6 +8,7 @@ using System.Windows;
 
 namespace moaui.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class User : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,18 +46,19 @@ namespace moaui.Models
 
             // we don't want names with numbers or symbols (barring ., -, and spaces?)
             if (!Regex.IsMatch(Name, @"^[a-zA-Z -\.]+$")) {
-                MessageBox.Show($"Error -- Name must contain only letters and spaces.");
+                MessageBox.Show($"Error -- Name must contain only -, ., letters and spaces.");
             }
             else {
                 UserID = Properties.Settings.Default.UserID;
                 Properties.Settings.Default.UserID++;
 
-                //// for debugging back to 0
+                //// TODO: Clean this up!
+                //// for debugging back to 0.
                 //Properties.Settings.Default.UserID = 0;
                 //UserID = Properties.Settings.Default.UserID;
 
                 Properties.Settings.Default.Save();
-                MessageBox.Show($"User {Name} created successfully! {{userid:{UserID.IDFormatting()}}}, {Skills}...");
+                MessageBox.Show($"User {Name} created successfully! {{userid:{ UserID.IDFormatting() }}}, { Skills }...");
                 NotifyPropertyChanged();
             }
         }
