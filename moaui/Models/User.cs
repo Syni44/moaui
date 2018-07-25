@@ -52,10 +52,10 @@ namespace moaui.Models
                 UserID = Properties.Settings.Default.UserID;
                 Properties.Settings.Default.UserID++;
 
-                // TODO: Clean this up!
-                // for debugging back to 0.
-                Properties.Settings.Default.UserID = 0;
-                UserID = Properties.Settings.Default.UserID;
+                //// TODO: Clean this up!
+                //// for debugging back to 0.
+                //Properties.Settings.Default.UserID = 0;
+                //UserID = Properties.Settings.Default.UserID;
 
                 Properties.Settings.Default.Save();
                 

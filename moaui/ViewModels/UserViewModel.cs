@@ -28,9 +28,10 @@ namespace moaui.ViewModels
             Skills = skills;
             YearsPlaying = years;
 
-            var newUser = new User(Name, Age, FavoriteBands, Skills, YearsPlaying);
+            // TODO: the majority of below should (probably) be refactored out of this constructor...?
 
             string jsonPath = GetPath(@"../../users.json");
+            var newUser = new User(Name, Age, FavoriteBands, Skills, YearsPlaying);            
 
             if (!File.Exists(jsonPath)) {
                 using (new FileStream(jsonPath, FileMode.Open, FileAccess.Read)) {
@@ -46,7 +47,6 @@ namespace moaui.ViewModels
             if (json.StartsWith("[")) {
                 userList = JsonConvert.DeserializeObject<List<User>>(json);
             }
-            // if the json contains no users...
             else {
                 userList = new List<User>();
             }
@@ -93,9 +93,9 @@ namespace moaui.ViewModels
         #region Helpers
 
         /// <summary>
-        /// Points the the current executing assembly, making the path straightforward.
+        /// Points the the current executing assembly and appends the path string argument given.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">Path string to append. Use "../" to indicate higher directory.</param>
         /// <returns></returns>
         private string GetPath(string path)
             => String.Join(System.Reflection.Assembly.GetExecutingAssembly().Location, path);
