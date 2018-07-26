@@ -22,7 +22,7 @@ namespace moaui.ViewModels
         #region constructor
 
         public UserViewModel(string name, int age, string bands, string skills, int years) {
-            Name = name;
+            Name = new String(name.RemoveUnnecessarySpace().ToCharArray());
             Age = age;
             FavoriteBands = bands;
             Skills = skills;

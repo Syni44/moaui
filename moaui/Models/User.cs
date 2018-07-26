@@ -38,7 +38,7 @@ namespace moaui.Models
         public User(string name, int age, string favoriteBands,
             string skills, int yearsPlaying) {
 
-            Name = new String(name.TrimStart().RemoveUnnecessarySpace().ToArray());
+            Name = new String(name.RemoveUnnecessarySpace().ToArray());
             Age = age;
             FavoriteBands = favoriteBands;
             Skills = skills;

@@ -1,0 +1,26 @@
+[
+  {
+    "userID": 0,
+    "name": "Jill B. Williams",
+    "age": 29,
+    "favoriteBands": "Anthrax",
+    "skills": "Drums",
+    "yearsPlaying": 10
+  },
+  {
+    "userID": 0,
+    "name": "Jonathan",
+    "age": 15,
+    "favoriteBands": "Pink Floyd",
+    "skills": "Trumpet",
+    "yearsPlaying": 2
+  },
+  {
+    "userID": 0,
+    "name": "eeeeeeEE WILL LL I A M ss",
+    "age": 27,
+    "favoriteBands": "none",
+    "skills": "some",
+    "yearsPlaying": 7
+  }
+]

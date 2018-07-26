@@ -1,29 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace moaui.Models
 {
     public static class Extensions
     {
         /// <summary>
-        /// Removes multiple, consecutive instances of a space (' ') character.
+        /// Trims a string to only allow single whitespace characters between words.
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string RemoveUnnecessarySpace(this string str) {
-            /* TODO: as of now this only looks at ONE non-TrimStart space. it needs to look
-             * at all instances of consecutive space characters rather than just the first.
-             * eg "Jane A. Doe" will become "Jane A.Doe"
-             *
-             * Perhaps this could be better handled by regex? (See usage in User.cs) */
+        public static string RemoveUnnecessarySpace(this string str) {            
+            string newString = "";
+            int strIndex = 0;
+            bool lettersSeen = false;
 
-            if (str.Contains(" ")) {
-                int charIndex = str.IndexOf(' ');
+            foreach (char c in str) {
+                // As long as the lettersSeen flag hasn't been turned on, don't record the whitespace
+                // character in the first instance of the [\s][^\s] pattern
+                if (!lettersSeen && Regex.IsMatch(c.ToString(), @"[^\s]")) {
+                    lettersSeen = true;
+                }
 
-                return str.Substring(0, charIndex + 1) +
-                       str.Substring(charIndex, str.Length - charIndex)
-                       .Replace(' '.ToString(), String.Empty).Trim();
+                // if the char is a whitespace char and is followed by a non-whitespace character,
+                // build this whitespace character into the new string
+                if ((strIndex != (str.Length - 1))
+                    && Regex.IsMatch(c.ToString() + str[strIndex + 1].ToString(), @"[\s][^\s]")
+                    && lettersSeen) {
+                    newString += " ";
+                }
+                else if (Regex.IsMatch(str[strIndex].ToString(), @"[^\s]")) newString += c;
+
+                strIndex++;
             }
-            else return str;
+
+            return newString;
         }
 
         /// <summary>

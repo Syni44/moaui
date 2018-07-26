@@ -31,5 +31,31 @@ namespace moaui_tests
             // assert that the extension method does *not* remove that single space
             Assert.AreNotEqual(notExpected: "CynthiaP.", actual: newStr);
         }
+
+        [TestMethod]
+        public void RemoveUnnecessarySpaceBeforeAndAfterTest() {
+            // next, our input string has whitespace chars before the first name, between all
+            // names, and after the last name.
+            string str = "     Jane  A.      Doe   ";
+
+            // test the extension method
+            string newStr = str.RemoveUnnecessarySpace();
+
+            // assert
+            Assert.AreEqual(expected: "Jane A. Doe", actual: newStr);
+        }
+
+        [TestMethod]
+        public void RemoveUnnecessarySpaceThrowbackTest() {
+            // finally, we want to make sure the extension method throws back the string
+            // as-is if it contains no space characters at all, as in a single name
+            string str = "Ella";
+
+            // test the extension method
+            string newStr = str.RemoveUnnecessarySpace();
+
+            // assert
+            Assert.AreEqual(expected: "Ella", actual: newStr);
+        }
     }
 }
