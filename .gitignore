@@ -330,4 +330,4 @@ ASALocalRun/
 .mfractor/
 
 # ignore the json(?)
-/moaui/*.json
+*.json
